@@ -2,6 +2,10 @@
 
 Sidestep API can be used to get a list of touring artists, their shows and products which are available for pre-ordering.
 
+## Contents:
+1. [Displaying Artists](public.md#displaying-artists)
+2. [Getting Merchandise for Artists and Tours](public.md#going-further-merchandise-for-tours-and-shows)
+
 ## API Token
 
 The every request to Sidestep API should include a header `X-SIDESTEP-APP-TOKEN` with a token of your Sidestep application. Please contact matt@sidestepapp.com if you haven't received your token yet.
