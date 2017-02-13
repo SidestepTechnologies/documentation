@@ -1,6 +1,6 @@
 # Sidestep API guide
 
-Sidestep API can be used to get a list of touring artists, their shows and products which are available for pre-ordering.
+The Sidestep API can be used to get a list of touring artists, their shows and products which are available for pre-order.
 
 ## Contents:
 1. [Displaying Artists](public.md#displaying-artists)
@@ -12,12 +12,12 @@ The every request to Sidestep API should include a header `X-SIDESTEP-APP-TOKEN`
 
 ## Displaying artists
 
-A pre-ordering of merchandise is available for currently touring artists. This list is maintained by Sidestep and it can be fetched with:
+Pre-ordering  merchandise is available for artists that are currently touring. If an artist is not currently touring with Sidestep, they will not be returned in the response. This list is maintained by Sidestep and it can be fetched with:
 
 #### Request
 ##### Params
 - referrer - referrer is an optional parameter which is used to generate
-ready-to-use artist URLs. URLs are returned in `sidestep_webstore_url` attribute.
+ready-to-use artist URLs. URLs are returned in the `sidestep_webstore_url` attribute.
 
 ```sh
 curl --request GET \
@@ -27,7 +27,7 @@ curl --request GET \
 
 #### Response
 
-A response contains a list of artists:
+The response contains a list of currently touring artists (with Sidestep):
 
 ```json
 {
@@ -92,7 +92,7 @@ currency  | ISO 3-letter currency code. Use it to format product prices within t
 
 ### Merchandise for a tour
 
-The endpoint `artists/:artist_id/store/products?tour_id=:tour_id` could be used to fetch a list of products for a tour.
+The endpoint `artists/:artist_id/store/products?tour_id=:tour_id` can be used to fetch a list of products for the tour.
 
 #### Request
 ##### Params
@@ -129,24 +129,21 @@ curl --request GET \
 }
 ```
 
-Here's a list of attributes to pay attention for:
+Product Attributes: 
 
 Attribute             | Description
 :-------------------- | :----------------------------------------------
 id                    |
 price                 | Product price in the currency used for the tour
 title                 |
-square_image          | An URL to image. A size is 640x640 pixels.
+square_image          | URL to the product image. The size is 640x640 pixels.
 sidestep_webstore_url | A ready-to-use URL of the artist store page on shopsidestepapp.com. Use it in `<a\>` tags.*
 
-* An URL in `sidestep_webstore_url` points to an artist store, but not to a
-product page of a specific product. It happens because Sidestep API doesn't have
-an ID of a show when a list of products is fetched for tour. This may be changed
-in the future.
+* The  URL in `sidestep_webstore_url` points to the artist's store (not to a product).
 
 ### Shows
 
-Every tour has a set of shows which can be retrieved at `tours/:tour_id/upcoming_shows`
+Every tour has a set of shows which can be retrieved via `tours/:tour_id/upcoming_shows`
 
 ```sh
 curl --request GET \
@@ -192,7 +189,7 @@ curl --request GET \
 }
 ```
 
-Here're attributes of a show :
+Show Attributes:
 
 Attribute     | Description
 :------------ | :-----------------------------------------------------------------------------------------
@@ -201,7 +198,7 @@ show_datetime | ISO 8601 formatted date & time in UTC. Use `Venue.time_zone_name
 currency      | ISO 3-letter currency code. Use it to format product prices within this tour.
 venue_id      | ID of a venue. Venues are always included into the response under the root key `venues`
 
-Venue has the following attributes:
+Venue attributes:
 
 Attribute      | Description
 :------------- | :-------------------------------------------------------------------------------
@@ -214,9 +211,9 @@ time_zone_name | IATA time zone name. Use it to display `Show.show_datetime` in 
 
 #### Important thing to know about date× of shows
 
-Date & time of shows are usually displayed in local timezones. Even for users which are located in a timezone other than a venue timezone. It's very similar to how flight arrival & departure times are always displayed in local times.
+Date and time of shows are usually displayed in the local timezone of the venue. It's very similar to how flight arrival & departure times are always displayed in local times.
 
-Sidestep API always return IATA time zone name in `time_zone_name` attribute of a venue object. An example value of this attribute is `America/New_York`. IATA timezone name can be used to convert a value in `show_datetime` to a local time.
+Sidestep API always returns IATA time zone name in `time_zone_name` attribute of a venue object. An example value of this attribute is `America/New_York`. IATA timezone name can be used to convert a value in `show_datetime` to a local time.
 
 ### Merchandise for a show
 
