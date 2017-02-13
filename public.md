@@ -8,7 +8,7 @@ The Sidestep API can be used to get a list of touring artists, their shows and p
 
 ## API Token
 
-The every request to Sidestep API should include a header `X-SIDESTEP-APP-TOKEN` with a token of your Sidestep application. Please contact matt@sidestepapp.com if you haven't received your token yet.
+Every request to Sidestep API should include a header `X-SIDESTEP-APP-TOKEN` with a token of your Sidestep application. Please contact matt@sidestepapp.com if you haven't received your token yet.
 
 ## Displaying artists
 
